@@ -14,8 +14,8 @@ class RetroInstance {
             .add(KotlinJsonAdapterFactory())
             .build()
 
-        fun getRetroInstance() {
-            Retrofit.Builder()
+        fun getRetroInstance(): Retrofit {
+            return Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .baseUrl(BASE_URL)
