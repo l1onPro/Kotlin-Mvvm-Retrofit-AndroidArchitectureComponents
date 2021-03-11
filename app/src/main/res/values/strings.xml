@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Kotlin-Mvvm-Retrofit-AndroidArchitectureComponents</string>
+    <string name="description_example_s1mle">Алекса́ндр Оле́гович Ко́стылев (укр. Олександр Олегович Костилєв; род. 2 октября 1997, Киев, Украина) — профессиональный украинский киберспортсмен, также известный как s1mple. Играет в команде Natus Vincere. Лучший игрок 2018 года в дисциплине Counter-Strike: Global Offensive по версии портала HLTV.org[1].</string>
+
+    <string name="stats_dpr">DPR</string>
+    <string name="stats_kast">KAST</string>
+    <string name="stats_impact">IMPACT</string>
+    <string name="stats_adr">ADR</string>
+    <string name="stats_kpr">KPR</string>
+    <string name="stats_rating_1_0">rating 1.0</string>
+    <string name="stats_rating_2_0">rating 2.0</string>
 </resources>

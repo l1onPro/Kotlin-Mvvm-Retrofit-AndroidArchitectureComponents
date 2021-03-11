@@ -9,251 +9,232 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/ll_stats"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/spacing_normal_16">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="200dp"
-                tools:src="@color/colorStar"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
+                android:id="@+id/ll_stats"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_description"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/spacing_normal_16">
 
-                <LinearLayout
-                    android:id="@+id/ll_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/tv_rating_1_0"
-                    android:layout_marginLeft="@dimen/spacing_small_8"
-                    android:orientation="vertical"
-                    tools:ignore="UnknownIdInLayout">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="200dp"
+                    tools:src="@color/colorStar"/>
 
-                    <TextView
-                        android:id="@+id/tv_nickname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/font_huge_24"
-                        android:maxLines="1"
-                        tools:text="S1mple" />
-
-                    <TextView
-                        android:id="@+id/tv_fullname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/font_large_20"
-                        android:maxLines="1"
-                        tools:text="Aleksandr Kostyliev" />
-                </LinearLayout>
-
-                <RatingBar
-                    android:id="@+id/startProPlayer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?android:attr/ratingBarStyleSmall"
-                    app:layout_constraintLeft_toRightOf="@+id/ll_title"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/ll_title"
-                    app:layout_constraintBottom_toBottomOf="@+id/ll_title"
-                    android:layout_gravity="left|center"
-                    android:progressTint="@color/colorStar"
-                    android:rating="5.0"/>
-
-                <LinearLayout
-                    android:id="@+id/ll_stats_line_1"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ll_title"
-                    app:layout_constraintBottom_toTopOf="@id/ll_stats_line_2"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:layout_height="match_parent">
 
                     <LinearLayout
+                        android:id="@+id/ll_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_title"
-                        android:layout_marginLeft="@dimen/spacing_small_8"
-                        android:orientation="vertical"
-                        tools:ignore="UnknownIdInLayout"
-                        android:layout_margin="@dimen/spacing_normal_16">
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="@dimen/spacing_small_8"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tv_rating_2_9"
+                            android:id="@+id/tv_nickname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_normal_16"
-                            android:layout_gravity="center"
-                            tools:text="1.28" />
+                            android:textSize="@dimen/font_huge_24"
+                            android:maxLines="1"
+                            tools:text="S1mple" />
 
                         <TextView
+                            android:id="@+id/tv_fullname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_small_12"
-                            android:layout_gravity="center"
-                            android:text="rating 1.0" />
+                            android:textSize="@dimen/font_large_20"
+                            android:maxLines="1"
+                            tools:text="Aleksandr Kostyliev" />
+                    </LinearLayout>
+
+                    <RatingBar
+                        android:id="@+id/startProPlayer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/ratingBarStyleSmall"
+                        app:layout_constraintLeft_toRightOf="@+id/ll_title"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/ll_title"
+                        app:layout_constraintBottom_toBottomOf="@+id/ll_title"
+                        android:progressTint="@color/colorStar"
+                        android:rating="5.0"/>
+
+                    <LinearLayout
+                        android:id="@+id/ll_stats_line_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ll_title"
+                        app:layout_constraintBottom_toTopOf="@id/ll_stats_line_2"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ll_title"
+                            style="@style/LinearLayout.Stats">
+
+                            <TextView
+                                android:id="@+id/tv_rating_2_0"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="1.28"
+                                style="@style/MyTextView.Stats" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Info"
+                                android:text="@string/stats_rating_2_0" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ll_title"
+                            style="@style/LinearLayout.Stats">
+
+                            <TextView
+                                android:id="@+id/tv_dpr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Stats"
+                                tools:text="1.28" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Info"
+                                android:text="@string/stats_dpr" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ll_title"
+                            style="@style/LinearLayout.Stats">
+
+                            <TextView
+                                android:id="@+id/tv_kast"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Stats"
+                                tools:text="1.28" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Info"
+                                android:text="@string/stats_kast" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:id="@+id/ll_stats_line_2"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_title"
-                        android:layout_marginLeft="@dimen/spacing_small_8"
-                        android:orientation="vertical"
-                        android:layout_margin="@dimen/spacing_normal_16">
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ll_stats_line_1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:orientation="horizontal"
+                        android:gravity="center">
 
-                        <TextView
-                            android:id="@+id/tv_dpr"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_normal_16"
-                            android:layout_gravity="center"
-                            tools:text="1.28" />
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ll_title"
+                            style="@style/LinearLayout.Stats">
 
-                        <TextView
+                            <TextView
+                                android:id="@+id/tv_rating_impact"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Stats"
+                                tools:text="1.28" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Info"
+                                android:text="@string/stats_impact" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_small_12"
-                            android:layout_gravity="center"
-                            android:text="rating 1.0" />
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ll_title"
+                            style="@style/LinearLayout.Stats">
+
+                            <TextView
+                                android:id="@+id/tv_adr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Stats"
+                                tools:text="1.28" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Info"
+                                android:text="@string/stats_adr" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ll_title"
+                            style="@style/LinearLayout.Stats">
+
+                            <TextView
+                                android:id="@+id/tv_kpr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Stats"
+                                tools:text="1.28" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/MyTextView.Info"
+                                android:text="@string/stats_kpr" />
+                        </LinearLayout>
                     </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_title"
-                        android:layout_marginLeft="@dimen/spacing_small_8"
-                        android:orientation="vertical"
-                        android:layout_margin="@dimen/spacing_normal_16">
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/ll_stats"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="@string/description_example_s1mle"
+                style="@style/MyTextView.Description" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <TextView
-                            android:id="@+id/tv_kast"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_normal_16"
-                            android:layout_gravity="center"
-                            tools:text="1.28" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_small_12"
-                            android:layout_gravity="center"
-                            android:text="rating 1.0" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_stats_line_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ll_stats_line_1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_title"
-                        android:layout_marginLeft="@dimen/spacing_small_8"
-                        android:orientation="vertical"
-                        tools:ignore="UnknownIdInLayout"
-                        android:layout_margin="@dimen/spacing_normal_16">
-
-                        <TextView
-                            android:id="@+id/tv_rating_impact"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_normal_16"
-                            android:layout_gravity="center"
-                            tools:text="1.28" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_small_12"
-                            android:layout_gravity="center"
-                            android:text="rating 1.0" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_title"
-                        android:layout_marginLeft="@dimen/spacing_small_8"
-                        android:orientation="vertical"
-                        android:layout_margin="@dimen/spacing_normal_16">
-
-                        <TextView
-                            android:id="@+id/tv_adr"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_normal_16"
-                            android:layout_gravity="center"
-                            tools:text="1.28" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_small_12"
-                            android:layout_gravity="center"
-                            android:text="rating 1.0" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_title"
-                        android:layout_marginLeft="@dimen/spacing_small_8"
-                        android:orientation="vertical"
-                        android:layout_margin="@dimen/spacing_normal_16">
-
-                        <TextView
-                            android:id="@+id/tv_kpr"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_normal_16"
-                            android:layout_gravity="center"
-                            tools:text="1.28" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/font_small_12"
-                            android:layout_gravity="center"
-                            android:text="rating 1.0" />
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_normal_16"
-
-
-
-
-            tools:text="Алекса́ндр Оле́гович Ко́стылев (укр. Олександр Олегович Костилєв; род. 2 октября 1997, Киев, Украина) — профессиональный украинский киберспортсмен, также известный как s1mple. Играет в команде Natus Vincere. Лучший игрок 2018 года в дисциплине Counter-Strike: Global Offensive по версии портала HLTV.org[1]."
-            />
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

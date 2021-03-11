@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_small_12"
                     android:layout_gravity="center"
-                    android:text="rating 1.0" />
+                    android:text="@string/stats_rating_1_0" />
 
             </LinearLayout>
 
