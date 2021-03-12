@@ -5,7 +5,6 @@
 
     </style>
 
-
     <style name="MyTextView.Stats" parent="MyTextView">
         <item name="android:textSize">@dimen/font_normal_16</item>
         <item name="android:layout_gravity">center</item>
@@ -21,6 +20,7 @@
         <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
         <item name="android:layout_marginRight">@dimen/spacing_normal_16</item>
     </style>
+
 
 
     <style name="LinearLayout">
