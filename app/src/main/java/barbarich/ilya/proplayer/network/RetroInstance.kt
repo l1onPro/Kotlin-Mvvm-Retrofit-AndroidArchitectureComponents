@@ -8,7 +8,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class RetroInstance {
     companion object {
-        private const val BASE_URL = "https://github.com/l1onPro/Kotlin-Mvvm-Retrofit-AndroidArchitectureComponents/tree/master/data/"
+        private const val BASE_URL = "https://raw.githubusercontent.com/l1onPro/Kotlin-Mvvm-Retrofit-AndroidArchitectureComponents/master/data/"
 
         private val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())

@@ -1,37 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="player"
+            type="barbarich.ilya.proplayer.network.model.PlayerInfo" />
+    </data>
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_tiny_4"
         app:cardCornerRadius="5dp"
         app:cardUseCompatPadding="true"
-        android:padding="@dimen/spacing_normal_16">
+        android:padding="@dimen/spacing_normal_16"
+        >
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/spacing_normal_16"
-            android:orientation="horizontal">
+            android:padding="@dimen/spacing_normal_16">
 
             <ImageView
+                android:id="@+id/iv_profile_avatar"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                app:imgUrl="@{player.image_small_avatar}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@color/colorStar"/>
 
             <LinearLayout
+                android:id="@+id/ll_title_stars"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_gravity="center"
                 android:layout_margin="@dimen/font_normal_16"
+                app:layout_constraintLeft_toRightOf="@+id/iv_profile_avatar"
+                app:layout_constraintTop_toTopOf="@+id/iv_profile_avatar"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_profile_avatar"
+                app:layout_constraintRight_toLeftOf="@+id/ll_rating"
                 android:orientation="vertical">
 
                 <TextView
@@ -40,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_large_20"
                     android:maxLines="1"
-                    android:layout_gravity="left|center"
+                    android:text="@{player.nick_name}"
                     tools:text="S1mple" />
 
                 <RatingBar
@@ -48,17 +59,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="?android:attr/ratingBarStyleSmall"
-                    android:layout_gravity="left|center"
                     android:progressTint="@color/colorStar"
-                    android:rating="2.0"/>
+                    android:rating="@{player.rating}" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/ll_rating"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_gravity="center">
+                app:layout_constraintLeft_toRightOf="@+id/ll_title_stars"
+                app:layout_constraintTop_toTopOf="@+id/iv_profile_avatar"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_profile_avatar"
+                app:layout_constraintRight_toRightOf="parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_rating_1_0"
@@ -66,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_normal_16"
                     android:layout_gravity="center"
+                    android:text="@{String.valueOf(player.rating_1_0)}"
                     tools:text="1.28" />
 
                 <TextView
@@ -77,10 +91,7 @@
 
             </LinearLayout>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
