@@ -3,13 +3,11 @@ package barbarich.ilya.proplayer.ui.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import barbarich.ilya.proplayer.network.PlayerApi
-import barbarich.ilya.proplayer.network.PlayerFilter
 import barbarich.ilya.proplayer.network.model.PlayerApiStatus
+import barbarich.ilya.proplayer.network.model.PlayerFilter
 import barbarich.ilya.proplayer.network.model.PlayerInfo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class OverviewViewModel : ViewModel() {
@@ -26,33 +24,21 @@ class OverviewViewModel : ViewModel() {
     val statusLoading: LiveData<PlayerApiStatus>
         get() = _statusLoading
 
-    private val viewModelJob = Job()
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
     fun displayPropertyDetails(playerInfo: PlayerInfo) {
         _selectedProperty.value = playerInfo
     }
-
-    fun displayPropertyDetailsComplete() {
-        _selectedProperty.value = null
-    }
-
-    private var coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
         getPlayerProperties(PlayerFilter.SORT_BY_RATING_1_0)
     }
 
     private fun getPlayerProperties(filter: PlayerFilter) {
-        coroutineScope.launch {
+        viewModelScope.launch {
             val listResult: List<PlayerInfo>
             val getPropertiesDeferred = PlayerApi.retrofitService.getDataFromApi(filter.value)
-
             try {
+
+
                 _statusLoading.value = PlayerApiStatus.LOADING
                 listResult = when (filter) {
                     PlayerFilter.SORT_BY_RATING_1_0 -> {
@@ -62,7 +48,7 @@ class OverviewViewModel : ViewModel() {
                         getPropertiesDeferred.await().sortedByDescending { it.rating }
                     }
                     PlayerFilter.SORT_BY_NAME -> {
-                        getPropertiesDeferred.await().sortedBy { it.nickName }
+                        getPropertiesDeferred.await().sortedBy { it.nick_name }
                     }
                 }
                 _statusLoading.value = PlayerApiStatus.DONE
