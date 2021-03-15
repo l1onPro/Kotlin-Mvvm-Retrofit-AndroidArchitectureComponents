@@ -1,12 +1,16 @@
 package barbarich.ilya.proplayer
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.test.platform.app.InstrumentationRegistry
+import barbarich.ilya.proplayer.network.PlayerApi
+import barbarich.ilya.proplayer.network.model.PlayerFilter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -20,5 +24,14 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("barbarich.ilya.proplayer", appContext.packageName)
+    }
+
+
+    @Test
+    fun getDataFromRetrofit() {
+        val scope = CoroutineScope(Dispatchers.Main + Job())
+        scope.launch {
+            val getPropertiesDeferred = PlayerApi.retrofitService.getDataFromApi(PlayerFilter.SORT_BY_NAME.value)
+        }
     }
 }
