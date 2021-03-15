@@ -33,7 +33,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
 }
 
 @BindingAdapter("status")
-fun bindStatus(progressBar: ProgressBar, playerApiStatus: PlayerApiStatus ){
+fun bindStatus(progressBar: ProgressBar, playerApiStatus: PlayerApiStatus? ){
     when(playerApiStatus) {
         PlayerApiStatus.LOADING -> progressBar.visibility = View.VISIBLE
         PlayerApiStatus.DONE -> progressBar.visibility = View.GONE
@@ -42,7 +42,7 @@ fun bindStatus(progressBar: ProgressBar, playerApiStatus: PlayerApiStatus ){
 }
 
 @BindingAdapter("errorImage")
-fun bindErrorImage(statusErrorImage: ImageView, playerApiStatus: PlayerApiStatus){
+fun bindErrorImage(statusErrorImage: ImageView, playerApiStatus: PlayerApiStatus?){
     when(playerApiStatus){
         PlayerApiStatus.ERROR -> {
             statusErrorImage.visibility = View.VISIBLE
