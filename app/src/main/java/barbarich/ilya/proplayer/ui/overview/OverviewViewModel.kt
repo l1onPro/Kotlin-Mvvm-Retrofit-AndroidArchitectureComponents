@@ -3,11 +3,13 @@ package barbarich.ilya.proplayer.ui.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import barbarich.ilya.proplayer.network.PlayerApi
 import barbarich.ilya.proplayer.network.model.PlayerApiStatus
 import barbarich.ilya.proplayer.network.model.PlayerFilter
 import barbarich.ilya.proplayer.network.model.PlayerInfo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class OverviewViewModel : ViewModel() {
@@ -28,17 +30,23 @@ class OverviewViewModel : ViewModel() {
         _selectedProperty.value = playerInfo
     }
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope( Dispatchers.Main + viewModelJob )
+
     init {
         getPlayerProperties(PlayerFilter.SORT_BY_RATING_1_0)
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
     private fun getPlayerProperties(filter: PlayerFilter) {
-        viewModelScope.launch {
+        coroutineScope.launch {
             val listResult: List<PlayerInfo>
             val getPropertiesDeferred = PlayerApi.retrofitService.getDataFromApi(filter.value)
             try {
-
-
                 _statusLoading.value = PlayerApiStatus.LOADING
                 listResult = when (filter) {
                     PlayerFilter.SORT_BY_RATING_1_0 -> {
