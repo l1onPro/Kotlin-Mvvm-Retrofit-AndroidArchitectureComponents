@@ -3,7 +3,7 @@
     "id": 100,
     "nick_name": "ZywOo",
     "fullname": "Mathieu Herbaut",
-    "age": 19
+    "age": 19,
     "image_small_avatar": "https://raw.githubusercontent.com/l1onPro/Kotlin-Mvvm-Retrofit-AndroidArchitectureComponents/master/data/100_avatar.png",
     "image_big": "https://raw.githubusercontent.com/l1onPro/Kotlin-Mvvm-Retrofit-AndroidArchitectureComponents/master/data/100.png",
     "rating_1_0": 1.28,
@@ -20,7 +20,7 @@
     "id": 200,
     "nick_name": "ZywOo",
     "fullname": "Mathieu Herbaut",
-    "age": 19
+    "age": 19,
     "image_small_avatar": "https://raw.githubusercontent.com/l1onPro/Kotlin-Mvvm-Retrofit-AndroidArchitectureComponents/master/data/100_avatar.png",
     "image_big": "https://raw.githubusercontent.com/l1onPro/Kotlin-Mvvm-Retrofit-AndroidArchitectureComponents/master/data/100.png",
     "rating_1_0": 1.28,
