@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import barbarich.ilya.proplayer.R
 import barbarich.ilya.proplayer.databinding.FragmentOverviewBinding
 import barbarich.ilya.proplayer.network.model.PlayerFilter
@@ -24,10 +25,9 @@ class OverviewFragment : Fragment() {
 
         binding.playerList.adapter = OverviewPlayerAdapter { playerInfo ->
             viewModel.displayPropertyDetails(playerInfo)
-            //parentFragmentManager.beginTransaction()
-            //    .remove(this)
-            //    .replace(android.R.id.content, InfoFragment())
-            //    .commitAllowingStateLoss()
+            if (playerInfo!=null){
+                this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToInfoFragment(playerInfo))
+            }
         }
 
         setHasOptionsMenu(true)

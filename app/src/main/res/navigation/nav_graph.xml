@@ -20,6 +20,12 @@
         android:label="InfoFragment"
         tools:layout="@layout/fragment_info_player">
 
+        <argument
+            android:name="selectedPlayer"
+            app:argType="barbarich.ilya.proplayer.network.model.PlayerInfo">
+
+        </argument>
+
         <action
             android:id="@+id/action_infoFragment_to_overviewFragment"
             app:destination="@id/overviewFragment" />

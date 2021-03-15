@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"    
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <data>
+        <variable
+            name="viewModel"
+            type="barbarich.ilya.proplayer.ui.info.InfoPlayerViewModel" />
+    </data>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,6 +31,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="200dp"
+                    app:imgUrl="@{viewModel.selectedPlayer.image_big}"
                     tools:src="@color/colorStar"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,6 +53,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/font_huge_24"
                             android:maxLines="1"
+                            android:text="@{viewModel.selectedPlayer.nick_name}"
                             tools:text="S1mple" />
 
                         <TextView
@@ -56,6 +62,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/font_large_20"
                             android:maxLines="1"
+                            android:text="@{viewModel.selectedPlayer.fullname}"
                             tools:text="Aleksandr Kostyliev" />
                     </LinearLayout>
 
@@ -69,7 +76,7 @@
                         app:layout_constraintTop_toTopOf="@id/ll_title"
                         app:layout_constraintBottom_toBottomOf="@+id/ll_title"
                         android:progressTint="@color/colorStar"
-                        android:rating="5.0"/>
+                        android:rating="@{viewModel.selectedPlayer.rating}"/>
 
                     <LinearLayout
                         android:id="@+id/ll_stats_line_1"
@@ -94,6 +101,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 tools:text="1.28"
+                                android:text="@{String.valueOf(viewModel.selectedPlayer.rating_2_0)}"
                                 style="@style/MyTextView.Stats" />
 
                             <TextView
@@ -114,6 +122,7 @@
                                 android:id="@+id/tv_dpr"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(viewModel.selectedPlayer.dpr)}"
                                 style="@style/MyTextView.Stats"
                                 tools:text="1.28" />
 
@@ -136,6 +145,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 style="@style/MyTextView.Stats"
+                                android:text="@{String.valueOf(viewModel.selectedPlayer.kast)}"
                                 tools:text="1.28" />
 
                             <TextView
@@ -169,6 +179,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 style="@style/MyTextView.Stats"
+                                android:text="@{String.valueOf(viewModel.selectedPlayer.impact)}"
                                 tools:text="1.28" />
 
                             <TextView
@@ -190,6 +201,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 style="@style/MyTextView.Stats"
+                                android:text="@{String.valueOf(viewModel.selectedPlayer.adr)}"
                                 tools:text="1.28" />
 
                             <TextView
@@ -211,6 +223,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 style="@style/MyTextView.Stats"
+                                android:text="@{String.valueOf(viewModel.selectedPlayer.kdp)}"
                                 tools:text="1.28" />
 
                             <TextView
@@ -232,9 +245,9 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="@string/description_example_s1mle"
+                android:text="@{String.valueOf(viewModel.selectedPlayer.description)}"
                 style="@style/MyTextView.Description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
