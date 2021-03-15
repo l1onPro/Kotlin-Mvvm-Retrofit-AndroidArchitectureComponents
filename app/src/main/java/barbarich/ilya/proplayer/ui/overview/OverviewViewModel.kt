@@ -14,17 +14,17 @@ import kotlinx.coroutines.launch
 
 class OverviewViewModel : ViewModel() {
 
-    private val _navigateToSelectedProperty = MutableLiveData<PlayerInfo>()
-    val navigateToSelectedProperty: LiveData<PlayerInfo>
-        get() = _navigateToSelectedProperty
+    private val _selectedProperty = MutableLiveData<PlayerInfo>()
+    val selectedProperty: LiveData<PlayerInfo>
+        get() = _selectedProperty
 
-    private val _properties = MutableLiveData<List<PlayerInfo>>()
-    val properties: LiveData<List<PlayerInfo>>
-        get() = _properties
+    private val _allPlayers = MutableLiveData<List<PlayerInfo>>()
+    val allPlayers: LiveData<List<PlayerInfo>>
+        get() = _allPlayers
 
-    private val _status = MutableLiveData<PlayerApiStatus>()
-    val status: LiveData<PlayerApiStatus>
-        get() = _status
+    private val _statusLoading = MutableLiveData<PlayerApiStatus>()
+    val statusLoading: LiveData<PlayerApiStatus>
+        get() = _statusLoading
 
     private val viewModelJob = Job()
 
@@ -34,11 +34,11 @@ class OverviewViewModel : ViewModel() {
     }
 
     fun displayPropertyDetails(playerInfo: PlayerInfo) {
-        _navigateToSelectedProperty.value = playerInfo
+        _selectedProperty.value = playerInfo
     }
 
     fun displayPropertyDetailsComplete() {
-        _navigateToSelectedProperty.value = null
+        _selectedProperty.value = null
     }
 
     private var coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -53,7 +53,7 @@ class OverviewViewModel : ViewModel() {
             val getPropertiesDeferred = PlayerApi.retrofitService.getDataFromApi(filter.value)
 
             try {
-                _status.value = PlayerApiStatus.LOADING
+                _statusLoading.value = PlayerApiStatus.LOADING
                 listResult = when (filter) {
                     PlayerFilter.SORT_BY_RATING_1_0 -> {
                         getPropertiesDeferred.await().sortedByDescending { it.rating_1_0 }
@@ -65,11 +65,11 @@ class OverviewViewModel : ViewModel() {
                         getPropertiesDeferred.await().sortedBy { it.nickName }
                     }
                 }
-                _status.value = PlayerApiStatus.DONE
-                _properties.value = listResult
+                _statusLoading.value = PlayerApiStatus.DONE
+                _allPlayers.value = listResult
             } catch (e: Exception) {
-                _status.value = PlayerApiStatus.ERROR
-                _properties.value = ArrayList()
+                _statusLoading.value = PlayerApiStatus.ERROR
+                _allPlayers.value = ArrayList()
             }
         }
     }
