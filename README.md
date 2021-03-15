@@ -9,5 +9,6 @@ Technology stack:
 6. Glide
 7. Android Data Binding
 8. Navigation Components
+9. Coroutines
 
 ![Image alt](https://i.imgur.com/8E2rnCV.png) ![Image alt](https://i.imgur.com/fdOFeEh.png)
