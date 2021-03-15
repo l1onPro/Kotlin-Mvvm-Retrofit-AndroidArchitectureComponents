@@ -15,7 +15,7 @@ import com.bumptech.glide.request.RequestOptions
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<PlayerInfo>?){
     val adapter = recyclerView.adapter as OverviewPlayerAdapter
-    //adapter.submitList(data)
+    adapter.submitList(data)
 }
 
 @BindingAdapter("imgUrl")
