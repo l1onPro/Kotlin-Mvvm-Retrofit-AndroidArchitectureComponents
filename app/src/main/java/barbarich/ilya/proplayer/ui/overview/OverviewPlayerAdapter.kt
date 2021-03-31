@@ -20,6 +20,10 @@ class OverviewPlayerAdapter(
         }
     }
 
+    fun setItems(playerList: List<PlayerInfo>) {
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OverViewHolder =
         OverViewHolder(ListOverviewItemBinding.inflate(LayoutInflater.from(parent.context)))
 

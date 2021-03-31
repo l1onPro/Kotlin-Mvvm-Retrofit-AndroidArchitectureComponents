@@ -8,9 +8,14 @@ import androidx.navigation.fragment.findNavController
 import barbarich.ilya.proplayer.R
 import barbarich.ilya.proplayer.databinding.FragmentOverviewBinding
 import barbarich.ilya.proplayer.network.model.PlayerFilter
+import barbarich.ilya.proplayer.network.model.PlayerInfo
+import barbarich.ilya.proplayer.redux.state.PlayersState
+import barbarich.ilya.proplayer.redux.store.store
+import org.rekotlin.StoreSubscriber
 
-class OverviewFragment : Fragment() {
+class OverviewFragment : Fragment(), StoreSubscriber<PlayersState> {
     private val viewModel: OverviewViewModel by viewModels ()
+    private lateinit var adapter: OverviewPlayerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,16 +28,31 @@ class OverviewFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.playerList.adapter = OverviewPlayerAdapter { playerInfo ->
+        adapter = OverviewPlayerAdapter { playerInfo ->
             viewModel.displayPropertyDetails(playerInfo)
             if (playerInfo!=null){
                 this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToInfoFragment(playerInfo))
             }
         }
+        //binding.playerList.adapter = adapter
 
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        store.subsribe(this) {state -> state.select {it.players}}
+    }
+
+    override fun onStop() {
+        super.onStop()
+        store.unsubscribe(this)
+    }
+
+    override fun newState(state: PlayersState) {
+        adapter.submitList(state.players)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
