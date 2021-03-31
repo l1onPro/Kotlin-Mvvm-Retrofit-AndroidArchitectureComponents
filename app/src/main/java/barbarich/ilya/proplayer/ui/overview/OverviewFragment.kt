@@ -43,7 +43,7 @@ class OverviewFragment : Fragment(), StoreSubscriber<PlayersState> {
 
     override fun onStart() {
         super.onStart()
-        store.subsribe(this) {state -> state.select {it.players}}
+        store.subscribe(this) {state -> state.select {it.players}}
     }
 
     override fun onStop() {

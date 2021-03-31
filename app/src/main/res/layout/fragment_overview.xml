@@ -14,12 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--app:listData="@{viewModel.allPlayers}"-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/player_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            <!--app:listData="@{viewModel.allPlayers}"-->
             tools:listitem="@layout/list_overview_item"/>
 
         <ProgressBar
