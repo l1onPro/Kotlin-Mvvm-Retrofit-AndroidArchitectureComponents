@@ -34,7 +34,8 @@ class OverviewFragment : Fragment(), StoreSubscriber<PlayersState> {
                 this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToInfoFragment(playerInfo))
             }
         }
-        //binding.playerList.adapter = adapter
+
+        binding.playerList.adapter = adapter
 
         setHasOptionsMenu(true)
 

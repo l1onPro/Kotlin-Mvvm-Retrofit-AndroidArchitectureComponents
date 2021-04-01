@@ -12,11 +12,11 @@ import barbarich.ilya.proplayer.ui.overview.OverviewPlayerAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-@BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<PlayerInfo>?){
-    val adapter = recyclerView.adapter as OverviewPlayerAdapter
-    adapter.submitList(data)
-}
+//@BindingAdapter("listData")
+//fun bindRecyclerView(recyclerView: RecyclerView, data: List<PlayerInfo>?){
+//    val adapter = recyclerView.adapter as OverviewPlayerAdapter
+//    adapter.submitList(data)
+//}
 
 @BindingAdapter("imgUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?){
