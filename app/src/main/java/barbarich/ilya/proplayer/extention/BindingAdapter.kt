@@ -32,7 +32,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
     }
 }
 
-@BindingAdapter("status")
+/*@BindingAdapter("status")
 fun bindStatus(progressBar: ProgressBar, playerApiStatus: PlayerApiStatus? ){
     when(playerApiStatus) {
         PlayerApiStatus.LOADING -> progressBar.visibility = View.VISIBLE
@@ -49,4 +49,4 @@ fun bindErrorImage(statusErrorImage: ImageView, playerApiStatus: PlayerApiStatus
             statusErrorImage.setImageResource(R.drawable.ic_baseline_error_24)
         }
     }
-}
+}*/

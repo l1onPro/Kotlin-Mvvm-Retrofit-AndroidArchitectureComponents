@@ -9,6 +9,7 @@ import barbarich.ilya.proplayer.R
 import barbarich.ilya.proplayer.databinding.FragmentOverviewBinding
 import barbarich.ilya.proplayer.network.model.PlayerFilter
 import barbarich.ilya.proplayer.network.model.PlayerInfo
+import barbarich.ilya.proplayer.redux.action.PlayerRequest
 import barbarich.ilya.proplayer.redux.state.PlayersState
 import barbarich.ilya.proplayer.redux.store.store
 import org.rekotlin.StoreSubscriber
@@ -26,7 +27,7 @@ class OverviewFragment : Fragment(), StoreSubscriber<PlayersState> {
 
         binding.lifecycleOwner = this
 
-        binding.viewModel = viewModel
+        //binding.viewModel = viewModel
 
         adapter = OverviewPlayerAdapter { playerInfo ->
             viewModel.displayPropertyDetails(playerInfo)
@@ -37,7 +38,9 @@ class OverviewFragment : Fragment(), StoreSubscriber<PlayersState> {
 
         binding.playerList.adapter = adapter
 
-        setHasOptionsMenu(true)
+        store.dispatch(PlayerRequest.FetchPlayers())
+
+        //setHasOptionsMenu(true)
 
         return binding.root
     }

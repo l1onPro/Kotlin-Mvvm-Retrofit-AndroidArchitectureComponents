@@ -40,7 +40,7 @@ class PlayerRequest {
                     //_statusLoading.value = PlayerApiStatus.DONE
                     //_allPlayers.value = listResult
                 } catch (e: Exception) {
-                    Failure(e)
+                    store.dispatch(Failure(e))
                     //_statusLoading.value = PlayerApiStatus.ERROR
                     //_allPlayers.value = ArrayList()
                 }

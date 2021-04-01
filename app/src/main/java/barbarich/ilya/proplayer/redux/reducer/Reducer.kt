@@ -18,13 +18,22 @@ fun playerReducer(action: Action, state: AppState): PlayersState {
     var newState = state.players
 
     when(action) {
+        is PlayerRequest.FetchPlayers -> {
+            newState = newState.copy(
+                status = PlayersState.Status.PENDING
+            )
+        }
+
         is PlayerRequest.FetchPlayers.Success -> {
             newState = newState.copy(
+                status = PlayersState.Status.IDLE,
                 players = action.players
             )
         }
         is PlayerRequest.FetchPlayers.Failure -> {
-
+            newState = newState.copy(
+                status = PlayersState.Status.IDLE
+            )
         }
     }
     return newState
