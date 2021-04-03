@@ -8,8 +8,8 @@ data class AppState(
 ) : StateType
 
 data class PlayersState (
-    val status: Status = Status.IDLE,
+    val status: Status = Status.LOADING,
     val players: List<PlayerInfo> = listOf()
 ) : StateType {
-    enum class Status {IDLE, PENDING}
+    enum class Status {LOADING, DONE, ERROR}
 }

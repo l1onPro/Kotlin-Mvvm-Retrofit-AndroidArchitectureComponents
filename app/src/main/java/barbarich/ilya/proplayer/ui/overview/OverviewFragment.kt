@@ -8,26 +8,26 @@ import androidx.navigation.fragment.findNavController
 import barbarich.ilya.proplayer.R
 import barbarich.ilya.proplayer.databinding.FragmentOverviewBinding
 import barbarich.ilya.proplayer.network.model.PlayerFilter
-import barbarich.ilya.proplayer.network.model.PlayerInfo
 import barbarich.ilya.proplayer.redux.action.PlayerRequest
 import barbarich.ilya.proplayer.redux.state.PlayersState
 import barbarich.ilya.proplayer.redux.store.store
 import org.rekotlin.StoreSubscriber
 
 class OverviewFragment : Fragment(), StoreSubscriber<PlayersState> {
+
     private val viewModel: OverviewViewModel by viewModels ()
+
     private lateinit var adapter: OverviewPlayerAdapter
+    private lateinit var binding: FragmentOverviewBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentOverviewBinding.inflate(inflater)
+        binding = FragmentOverviewBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
-
-        //binding.viewModel = viewModel
 
         adapter = OverviewPlayerAdapter { playerInfo ->
             viewModel.displayPropertyDetails(playerInfo)
@@ -47,7 +47,7 @@ class OverviewFragment : Fragment(), StoreSubscriber<PlayersState> {
 
     override fun onStart() {
         super.onStart()
-        store.subscribe(this) {state -> state.select {it.players}}
+        store.subscribe(this) {state -> state.select {it.players} }
     }
 
     override fun onStop() {
@@ -57,6 +57,7 @@ class OverviewFragment : Fragment(), StoreSubscriber<PlayersState> {
 
     override fun newState(state: PlayersState) {
         adapter.submitList(state.players)
+        binding.state = state.status
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

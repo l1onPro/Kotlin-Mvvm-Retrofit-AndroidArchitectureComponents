@@ -4,11 +4,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import barbarich.ilya.proplayer.R
-import barbarich.ilya.proplayer.network.model.PlayerApiStatus
-import barbarich.ilya.proplayer.network.model.PlayerInfo
-import barbarich.ilya.proplayer.ui.overview.OverviewPlayerAdapter
+import barbarich.ilya.proplayer.redux.state.PlayersState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
@@ -32,16 +29,16 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
     }
 }
 
-/*@BindingAdapter("status")
-fun bindStatus(progressBar: ProgressBar, playerApiStatus: PlayerApiStatus? ){
-    when(playerApiStatus) {
-        PlayerApiStatus.LOADING -> progressBar.visibility = View.VISIBLE
-        PlayerApiStatus.DONE -> progressBar.visibility = View.GONE
-        PlayerApiStatus.ERROR -> progressBar.visibility = View.GONE
+@BindingAdapter("status")
+fun bindStatus(progressBar: ProgressBar, playerStateStatus: PlayersState.Status? ){
+    when(playerStateStatus) {
+        PlayersState.Status.LOADING -> progressBar.visibility = View.VISIBLE
+        PlayersState.Status.DONE -> progressBar.visibility = View.GONE
+        PlayersState.Status.ERROR -> progressBar.visibility = View.GONE
     }
 }
 
-@BindingAdapter("errorImage")
+/*@BindingAdapter("errorImage")
 fun bindErrorImage(statusErrorImage: ImageView, playerApiStatus: PlayerApiStatus?){
     when(playerApiStatus){
         PlayerApiStatus.ERROR -> {
