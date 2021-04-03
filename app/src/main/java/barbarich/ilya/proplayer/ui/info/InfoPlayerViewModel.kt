@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import barbarich.ilya.proplayer.network.model.PlayerInfo
 
-class InfoPlayerViewModel(playerInfo: PlayerInfo ) : ViewModel() {
-    private val _selectedPlayer = MutableLiveData<PlayerInfo>()
+class InfoPlayerViewModel: ViewModel() {
+    private var _selectedPlayer = MutableLiveData<PlayerInfo>()
     val selectedPlayer: LiveData<PlayerInfo>
         get() = _selectedPlayer
 
-    init {
-        _selectedPlayer.value = playerInfo
+    fun setSelectedPlayer(playerInfo: PlayerInfo) {
+        playerInfo.let {
+            _selectedPlayer.value = playerInfo
+        }
     }
 }
