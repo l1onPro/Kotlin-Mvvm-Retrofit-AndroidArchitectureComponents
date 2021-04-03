@@ -29,7 +29,7 @@ class OverviewFragment : Fragment(), StoreSubscriber<PlayersState> {
         binding.lifecycleOwner = this
 
         adapter = OverviewPlayerAdapter { playerInfo ->
-            if (playerInfo!=null){
+            playerInfo.let {
                 this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToInfoFragment(playerInfo))
             }
         }
