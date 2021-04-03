@@ -11,18 +11,19 @@ import kotlinx.coroutines.launch
 import org.rekotlin.Action
 
 class PlayerRequest {
-    class FetchPlayers(val playerFilter: PlayerFilter ) : Request() {
-        private var viewModelJob = Job()
-        private val coroutineScope = CoroutineScope( Dispatchers.Main + viewModelJob )
+    class FetchPlayers(val playerFilter: PlayerFilter = PlayerFilter.SORT_BY_NAME) : Request() {
+        private var job = Job()
+        private val coroutineScope = CoroutineScope( Dispatchers.Main + job )
 
         override fun execute() {
             coroutineScope.launch {
                 val listResult: List<PlayerInfo>
-                val filter = PlayerFilter.SORT_BY_NAME
-                val getPropertiesDeferred = PlayerApi.retrofitService.getDataFromApi(filter.value)
+
+                val getPropertiesDeferred = PlayerApi.retrofitService.getDataFromApi(playerFilter.value)
+
                 try {
                     //Log.d("Test", "PlayerRequest -> execute -> getDateRetrofit")
-                    listResult = when (filter) {
+                    listResult = when (playerFilter) {
                         PlayerFilter.SORT_BY_RATING_1_0 -> {
                             getPropertiesDeferred.await().sortedByDescending { it.rating_1_0 }
                         }
@@ -34,6 +35,7 @@ class PlayerRequest {
                         }
                     }
                     //Log.d("Test", "lsistResult = ${listResult}")
+
                     store.dispatch(Success(listResult))
                     //Log.d("Test", "PlayerRequest -> execute -> Success execute getDateRetrofit")
 
