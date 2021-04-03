@@ -1,5 +1,6 @@
 package barbarich.ilya.proplayer.redux.action
 
+import android.util.Log
 import barbarich.ilya.proplayer.network.PlayerApi
 import barbarich.ilya.proplayer.network.model.PlayerApiStatus
 import barbarich.ilya.proplayer.network.model.PlayerFilter
@@ -22,7 +23,7 @@ class PlayerRequest {
                 val filter = PlayerFilter.SORT_BY_NAME
                 val getPropertiesDeferred = PlayerApi.retrofitService.getDataFromApi(filter.value)
                 try {
-                    //_statusLoading.value = PlayerApiStatus.LOADING
+                    //Log.d("Test", "PlayerRequest -> execute -> getDateRetrofit")
                     listResult = when (filter) {
                         PlayerFilter.SORT_BY_RATING_1_0 -> {
                             getPropertiesDeferred.await().sortedByDescending { it.rating_1_0 }
@@ -34,15 +35,13 @@ class PlayerRequest {
                             getPropertiesDeferred.await().sortedBy { it.nick_name }
                         }
                     }
-
+                    //Log.d("Test", "lsistResult = ${listResult}")
                     store.dispatch(Success(listResult))
+                    //Log.d("Test", "PlayerRequest -> execute -> Success execute getDateRetrofit")
 
-                    //_statusLoading.value = PlayerApiStatus.DONE
-                    //_allPlayers.value = listResult
                 } catch (e: Exception) {
+                    //Log.d("Test", "PlayerRequest -> execute ->fail getDateRetrofit")
                     store.dispatch(Failure(e))
-                    //_statusLoading.value = PlayerApiStatus.ERROR
-                    //_allPlayers.value = ArrayList()
                 }
             }
         }
