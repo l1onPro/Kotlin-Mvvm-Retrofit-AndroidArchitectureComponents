@@ -9,12 +9,6 @@ import barbarich.ilya.proplayer.redux.state.PlayersState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-//@BindingAdapter("listData")
-//fun bindRecyclerView(recyclerView: RecyclerView, data: List<PlayerInfo>?){
-//    val adapter = recyclerView.adapter as OverviewPlayerAdapter
-//    adapter.submitList(data)
-//}
-
 @BindingAdapter("imgUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?){
     imgUrl.let {
@@ -38,12 +32,12 @@ fun bindStatus(progressBar: ProgressBar, playerStateStatus: PlayersState.Status?
     }
 }
 
-/*@BindingAdapter("errorImage")
-fun bindErrorImage(statusErrorImage: ImageView, playerApiStatus: PlayerApiStatus?){
+@BindingAdapter("errorImage")
+fun bindErrorImage(statusErrorImage: ImageView, playerApiStatus: PlayersState.Status?){
     when(playerApiStatus){
-        PlayerApiStatus.ERROR -> {
+        PlayersState.Status.ERROR -> {
             statusErrorImage.visibility = View.VISIBLE
             statusErrorImage.setImageResource(R.drawable.ic_baseline_error_24)
         }
     }
-}*/
+}

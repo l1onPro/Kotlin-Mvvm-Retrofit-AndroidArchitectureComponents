@@ -1,8 +1,6 @@
 package barbarich.ilya.proplayer.redux.action
 
-import android.util.Log
 import barbarich.ilya.proplayer.network.PlayerApi
-import barbarich.ilya.proplayer.network.model.PlayerApiStatus
 import barbarich.ilya.proplayer.network.model.PlayerFilter
 import barbarich.ilya.proplayer.network.model.PlayerInfo
 import barbarich.ilya.proplayer.redux.store.store
@@ -13,7 +11,7 @@ import kotlinx.coroutines.launch
 import org.rekotlin.Action
 
 class PlayerRequest {
-    class FetchPlayers : Request() {
+    class FetchPlayers(val playerFilter: PlayerFilter ) : Request() {
         private var viewModelJob = Job()
         private val coroutineScope = CoroutineScope( Dispatchers.Main + viewModelJob )
 
