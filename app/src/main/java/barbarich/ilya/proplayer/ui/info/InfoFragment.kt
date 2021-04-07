@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import barbarich.ilya.proplayer.databinding.FragmentInfoPlayerBinding
+import barbarich.ilya.proplayer.redux.state.AppState
+import barbarich.ilya.proplayer.redux.store.store
+import org.rekotlin.StoreSubscriber
 
-class InfoFragment : Fragment() {
+class InfoFragment : Fragment(), StoreSubscriber<AppState> {
     private val viewModel: InfoPlayerViewModel by viewModels()
 
     override fun onCreateView(
@@ -21,11 +24,23 @@ class InfoFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        //viewModel.setSelectedPlayer(infoPlayer)
-
-        //binding.viewModel = viewModel
+        binding.viewModel = viewModel
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        store.subscribe(this) { state -> state.select { it } }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        store.unsubscribe(this)
+    }
+
+    override fun newState(state: AppState) {
+        viewModel.setSelectedPlayer(state.players.players[state.selectedPlayerId.id])
     }
 }
 

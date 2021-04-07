@@ -8,7 +8,7 @@ class SelectedPlayerRequest {
 
     class SelectPlayer(val selectIdPlayer: Int) : Request() {
         override fun execute() {
-            if (selectIdPlayer > 0 && selectIdPlayer < store.state.players.players.size) {
+            if (selectIdPlayer >= 0 && selectIdPlayer < store.state.players.players.size) {
                 Log.d("Test", "playerId = ${selectIdPlayer}")
                 store.dispatch(Success(selectIdPlayer))
             }
