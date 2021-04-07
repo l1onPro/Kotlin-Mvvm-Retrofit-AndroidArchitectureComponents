@@ -1,14 +1,18 @@
 package barbarich.ilya.proplayer.redux.reducer
 
 import barbarich.ilya.proplayer.redux.action.PlayerRequest
+import barbarich.ilya.proplayer.redux.action.SelectedPlayerRequest
 import barbarich.ilya.proplayer.redux.state.AppState
 import barbarich.ilya.proplayer.redux.state.PlayersState
+import barbarich.ilya.proplayer.redux.state.SelectPlayerState
 import org.rekotlin.Action
 
 fun appReducer(action: Action, state: AppState?): AppState {
     requireNotNull(state)
+
     return AppState(
-        players = playerReducer(action, state)
+            players = playerReducer(action, state),
+            selectedPlayerId = selectPlayerReducer(action, state)
     )
 }
 
@@ -36,4 +40,21 @@ fun playerReducer(action: Action, state: AppState): PlayersState {
         }
     }
     return newState
+}
+
+fun selectPlayerReducer(action: Action, state: AppState) : SelectPlayerState {
+
+    var newState = state.selectedPlayerId
+
+    when(action) {
+        is SelectedPlayerRequest.SelectPlayer.Success -> {
+            newState = newState.copy(
+                    id = action.playerId
+            )
+        }
+        is SelectedPlayerRequest.SelectPlayer.Failure -> {
+
+        }
+    }
+    return  newState
 }

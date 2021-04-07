@@ -21,10 +21,9 @@ class InfoFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        val infoPlayer = InfoFragmentArgs.fromBundle(requireArguments()).selectedPlayer
-        viewModel.setSelectedPlayer(infoPlayer)
+        //viewModel.setSelectedPlayer(infoPlayer)
 
-        binding.viewModel = viewModel
+        //binding.viewModel = viewModel
 
         return binding.root
     }

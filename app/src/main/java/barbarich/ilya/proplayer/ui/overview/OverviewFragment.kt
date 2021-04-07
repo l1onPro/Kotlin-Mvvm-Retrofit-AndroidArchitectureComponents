@@ -8,6 +8,7 @@ import barbarich.ilya.proplayer.R
 import barbarich.ilya.proplayer.databinding.FragmentOverviewBinding
 import barbarich.ilya.proplayer.network.model.PlayerFilter
 import barbarich.ilya.proplayer.redux.action.PlayerRequest
+import barbarich.ilya.proplayer.redux.action.SelectedPlayerRequest
 import barbarich.ilya.proplayer.redux.state.PlayersState
 import barbarich.ilya.proplayer.redux.store.store
 import org.rekotlin.StoreSubscriber
@@ -28,10 +29,11 @@ class OverviewFragment : Fragment(), StoreSubscriber<PlayersState> {
 
         binding.lifecycleOwner = this
 
-        adapter = OverviewPlayerAdapter { playerInfo ->
-            playerInfo.let {
-                this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToInfoFragment(playerInfo))
-            }
+        adapter = OverviewPlayerAdapter { id ->
+
+            store.dispatch(SelectedPlayerRequest.SelectPlayer(id))
+
+            this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToInfoFragment())
         }
 
         binding.playerList.adapter = adapter

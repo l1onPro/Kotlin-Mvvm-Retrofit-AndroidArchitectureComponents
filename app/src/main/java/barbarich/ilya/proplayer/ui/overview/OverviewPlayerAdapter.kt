@@ -9,7 +9,7 @@ import barbarich.ilya.proplayer.databinding.ListOverviewItemBinding
 import barbarich.ilya.proplayer.network.model.PlayerInfo
 
 class OverviewPlayerAdapter(
-    private val onUserClick: (PlayerInfo) -> Unit
+    private val onUserClick: (Int) -> Unit
 ) : ListAdapter<PlayerInfo, OverviewPlayerAdapter.OverViewHolder>(PLAYER_COMPARATOR) {
 
     class OverViewHolder(private var binding: ListOverviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -25,7 +25,7 @@ class OverviewPlayerAdapter(
 
     override fun onBindViewHolder(holder: OverViewHolder, position: Int) {
         val player = getItem(position)
-        holder.itemView.setOnClickListener { onUserClick(player) }
+        holder.itemView.setOnClickListener { onUserClick(position) }
         holder.bind(player)
     }
 
