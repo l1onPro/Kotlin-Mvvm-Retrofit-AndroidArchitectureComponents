@@ -18,7 +18,6 @@ data class PlayersState (
         DONE,
         ERROR
     }
-
 }
 
 data class SelectPlayerState (
