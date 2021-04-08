@@ -10,6 +10,7 @@ import barbarich.ilya.proplayer.databinding.FragmentOverviewBinding
 import barbarich.ilya.proplayer.network.model.PlayerFilter
 
 class OverviewFragment : Fragment() {
+
     private val viewModel: OverviewViewModel by viewModels ()
 
     override fun onCreateView(
@@ -23,11 +24,11 @@ class OverviewFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.playerList.adapter = OverviewPlayerAdapter { playerInfo ->
-            viewModel.displayPropertyDetails(playerInfo)
-            if (playerInfo!=null){
-                this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToInfoFragment(playerInfo))
-            }
+        binding.playerList.adapter = OverviewPlayerAdapter { id ->
+
+            viewModel.updateIdSelectPlayer(id)
+
+            this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToInfoFragment())
         }
 
         setHasOptionsMenu(true)

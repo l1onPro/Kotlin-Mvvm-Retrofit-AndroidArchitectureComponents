@@ -78,4 +78,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
     implementation "androidx.fragment:fragment-ktx:1.2.4"
+
+    //Redux
+    implementation 'org.rekotlin:rekotlin:1.0.4'
 }

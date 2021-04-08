@@ -1,16 +1,16 @@
 package barbarich.ilya.proplayer.ui.info
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import barbarich.ilya.proplayer.databinding.FragmentInfoPlayerBinding
 
 class InfoFragment : Fragment() {
-    @SuppressLint("UseRequireInsteadOfGet")
+    private val viewModel: InfoPlayerViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,9 +21,10 @@ class InfoFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        val infoPlayer = InfoFragmentArgs.fromBundle(arguments!!).selectedPlayer
-        val viewModelFactory = InfoPlayerFactory(infoPlayer)
-        binding.viewModel = ViewModelProviders.of(this, viewModelFactory).get(InfoPlayerViewModel::class.java)
+        binding.viewModel = viewModel
+
         return binding.root
     }
 }
+
+

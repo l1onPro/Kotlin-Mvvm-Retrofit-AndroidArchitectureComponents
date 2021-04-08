@@ -3,72 +3,43 @@ package barbarich.ilya.proplayer.ui.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import barbarich.ilya.proplayer.network.PlayerApi
-import barbarich.ilya.proplayer.network.model.PlayerApiStatus
 import barbarich.ilya.proplayer.network.model.PlayerFilter
 import barbarich.ilya.proplayer.network.model.PlayerInfo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import barbarich.ilya.proplayer.redux.action.PlayerRequest
+import barbarich.ilya.proplayer.redux.action.SelectedPlayerRequest
+import barbarich.ilya.proplayer.redux.state.PlayersState
+import barbarich.ilya.proplayer.redux.store.store
+import org.rekotlin.StoreSubscriber
 
-class OverviewViewModel : ViewModel() {
-
-    private val _selectedProperty = MutableLiveData<PlayerInfo>()
-    val selectedProperty: LiveData<PlayerInfo>
-        get() = _selectedProperty
-
+class OverviewViewModel : ViewModel(), StoreSubscriber<PlayersState> {
     private val _allPlayers = MutableLiveData<List<PlayerInfo>>()
     val allPlayers: LiveData<List<PlayerInfo>>
         get() = _allPlayers
 
-    private val _statusLoading = MutableLiveData<PlayerApiStatus>()
-    val statusLoading: LiveData<PlayerApiStatus>
+    private val _statusLoading = MutableLiveData<PlayersState.Status>()
+    val statusLoading: LiveData<PlayersState.Status>
         get() = _statusLoading
 
-    fun displayPropertyDetails(playerInfo: PlayerInfo) {
-        _selectedProperty.value = playerInfo
-    }
-
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope( Dispatchers.Main + viewModelJob )
-
     init {
-        getPlayerProperties(PlayerFilter.SORT_BY_RATING_1_0)
+        store.subscribe(this) { state -> state.select {it.players} }
+        store.dispatch(PlayerRequest.FetchPlayers())
     }
 
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+        store.unsubscribe(this)
     }
 
-    private fun getPlayerProperties(filter: PlayerFilter) {
-        coroutineScope.launch {
-            val listResult: List<PlayerInfo>
-            val getPropertiesDeferred = PlayerApi.retrofitService.getDataFromApi(filter.value)
-            try {
-                _statusLoading.value = PlayerApiStatus.LOADING
-                listResult = when (filter) {
-                    PlayerFilter.SORT_BY_RATING_1_0 -> {
-                        getPropertiesDeferred.await().sortedByDescending { it.rating_1_0 }
-                    }
-                    PlayerFilter.SORT_BY_RATING -> {
-                        getPropertiesDeferred.await().sortedByDescending { it.rating }
-                    }
-                    PlayerFilter.SORT_BY_NAME -> {
-                        getPropertiesDeferred.await().sortedBy { it.nick_name }
-                    }
-                }
-                _statusLoading.value = PlayerApiStatus.DONE
-                _allPlayers.value = listResult
-            } catch (e: Exception) {
-                _statusLoading.value = PlayerApiStatus.ERROR
-                _allPlayers.value = ArrayList()
-            }
-        }
+    override fun newState(state: PlayersState) {
+        _allPlayers.value = state.players
+        _statusLoading.value = state.status
     }
 
-    fun updateFilter(filter: PlayerFilter){
-        getPlayerProperties(filter)
+    fun updateIdSelectPlayer(id: Int) {
+        store.dispatch(SelectedPlayerRequest.SelectPlayer(id))
+    }
+
+    fun updateFilter(filter: PlayerFilter) {
+        store.dispatch(PlayerRequest.FetchPlayers(filter))
     }
 }
